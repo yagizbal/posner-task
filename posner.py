@@ -20,9 +20,10 @@ def one_loop(location_slots, validity_effect,delay,validity_variance=0,delay_var
         location_of_arrow = random.choice(list2)
     else:
         location_of_arrow = location_chosen
+    
     if delay_variance!=0:
         delay_add = range(0,int(delay*delay_variance))
         delay = delay+(random.choice(delay_add)*random.choice([-1,1]))
 
-    print(v,invalidness)
+    print(v,invalidness,invalid)
     return invalid,delay,location_chosen,location_slots,location_of_arrow
