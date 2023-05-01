@@ -23,8 +23,9 @@ center_y = screen_y // 2
 location_slots = num_squares
 validity_effect = 0.2
 delay = 60 
-validity_variance = 0.1
-delay_variance = 0.1
+validity_variance = 0
+delay_variance = 0.2
+
 def draw_square(angle, color=(255, 0, 0)):
     x = center_x + radius * math.cos(math.radians(angle)) - square_size // 2
     y = center_y + radius * math.sin(math.radians(angle)) - square_size // 2
@@ -94,9 +95,11 @@ while True:
             if (target_square[0] <= mouse_x <= target_square[0] + square_size and
                 target_square[1] <= mouse_y <= target_square[1] + square_size):
                 win_text = True
-                win_text_timer = pygame.time.get_ticks() + 300  # Set the timer for 1000 milliseconds
+                win_text_timer = pygame.time.get_ticks() + 300
 
-                invalid, delay, location_chosen, location_slots, location_of_arrow = one_loop(num_squares, 0.2, 1000, 0.2, 0.2)
+                invalid, delay, location_chosen, location_slots, location_of_arrow =one_loop(
+                    location_slots=num_squares, validity_effect=validity_effect,delay=delay,
+                    validity_variance=validity_variance, delay_variance=delay_variance)
                 target_square = squares[location_chosen]
                 arrow_square = squares[location_of_arrow]
                 w_timer = pygame.time.get_ticks() + delay
